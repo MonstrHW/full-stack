@@ -10,7 +10,7 @@
     </tr>
     {section name=i loop=$users}
     <tr>
-        <td>{$users[i].plot_id}</td>
+        <td>{if $users[i].plot_id} {$users[i].plot_id} {else} - {/if}</td>
         <td>{$users[i].first_name}</td>
         <td>{$users[i].last_name}</td>
         <td>{$users[i].phone_str}</td>
@@ -26,6 +26,9 @@
                         onclick="common.user_edit_window({$users[i].id}, event);"
                     >
                         Edit
+                    </div>
+                    <div onclick="common.user_delete({$users[i].id}, event);">
+                        Delete
                     </div>
                 </div>
             </i>

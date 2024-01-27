@@ -171,6 +171,41 @@ let common = {
         });
     },
 
+    user_edit_update: (user_id = 0) => {
+        // vars
+        let data = {
+            user_id: user_id,
+            first_name: gv('first_name'),
+            last_name: gv('last_name'),
+            email: gv('email'),
+            phone: gv('phone'),
+            plot_id: gv('plot_id'),
+            offset: global.offset
+        };
+        let location = {dpt: 'user', act: 'edit_update'};
+        // call
+        request({location: location, data: data}, (result) => {
+            if (result?.status == 'error') {
+                alert(result?.message);
+                return;
+            }
+
+            common.modal_hide();
+            html('table', result.html);
+        });
+    },
+
+    user_delete: (user_id = 0) => {
+        let data = {
+            user_id: user_id,
+            offset: global.offset
+        };
+        let location = {dpt: 'user', act: 'delete'};
+        // call
+        request({location: location, data: data}, (result) => {
+            html('table', result.html);
+        });
+    }
 }
 
 add_event(document, 'DOMContentLoaded', common.init);
